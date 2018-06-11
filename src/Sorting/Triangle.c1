@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int comp(const void* el1, const void* el2)
+{
+    return ( *(int*)el1 - *(int*)el2 );
+}
+
+int solution( int A[], int N)
+{
+    if (N<3) return 0;
+    for (int i = 0; i < N; i++)
+    {
+        if (A[i] < 0) A[i] = 0;
+    }
+    qsort ( A, N, sizeof(*A), comp);
+    for (int i = 0; i < N - 2; i++)
+    {
+        if ( (long)A[i] + (long)A[i+1] > A[i+2] ) return 1;
+    }         
+    return 0;
+}
+
+int main()
+{
+    int test1[] = {2147483647,2147483647,2147483647};
+    int test2[] = {1,2,5,20,50,75,150,400};
+    printf( "%d \n", solution(test1, 3));
+    printf( "%d \n", solution(test2, 8));
+    return 0;
+}
+
+

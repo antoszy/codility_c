@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int solution( int [], int);
+
+int main()
+{
+    int** tests = malloc(4*sizeof(int*));
+    int t1[] = {1 , 3, 4, 2};
+    int t2[] = {4, 1, 3, 2};
+    int t3[] = {1};
+    int t4[] = {2};
+    tests[0] = t1;
+    tests[1] = t2;
+    tests[2] = t3;
+    tests[3] = t4;
+
+    int sizes[] = {4, 4, 1, 1};
+
+    for (int i= 0; i<4; i++) printf("test%d result: %d\n", i, solution( tests[i], sizes[i]));
+    return 0;
+}
+
+int solution( int A[], int N)
+{
+    int* count = calloc(N,sizeof(int));
+    for (int i = 0; i < N; i++)
+    {
+        if ( A[i] > N || A[i] < 1) return 0;
+        count[ A[i]-1 ]++;
+        if (count[ A[i] -1 ] > 1) return 0;
+    }
+    return 1;
+}
+

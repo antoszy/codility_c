@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Results {
+  int * A;
+  int N; // Length of the array
+};
+
+struct Results solution(int[], int, int );
+
+int main()
+{
+    int A[] = {1};
+    struct Results result = solution(A, 1, 7);
+    for (int i = 0; i < result.N; i++)
+    {
+        printf("%d ", result.A[i]);
+    }
+    return 0;
+}
+
+
+struct Results solution(int A[], int N, int K)
+{
+    //initialize result struct
+    struct Results result;
+    int* tmpArr = malloc(N*sizeof(int));
+    result.A = tmpArr; 
+    result.N = N;
+
+    //compute K reduced by multiple of array length
+    if ( N > 0)
+    {
+        K -= (N * (K / N));
+        printf("K = %d\n ", K);
+
+        //rotate array
+        for (int i = 0; i < N; i++)
+        {
+            tmpArr[ (i+K)%N ] = A[i];
+        }
+    }
+    
+    return result;
+}

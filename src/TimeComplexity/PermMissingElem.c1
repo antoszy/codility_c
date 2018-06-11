@@ -1,0 +1,29 @@
+#include <stdio.h>
+
+typedef long long int lont;
+
+int solution(int[], int);
+
+int main()
+{
+    int arr[] = {2,1,5,4};
+    int N = sizeof(arr)/sizeof(arr[0]);
+    printf( "%d \n", solution(arr, N));
+}
+
+int solution(int arr[], int N)
+{
+    if ( N == 0)
+    {
+        return 1;
+    }
+
+    lont sumIdx = N*(N+1)/2 + N+1;
+
+    for (int i = 0; i < N; i++)
+    {
+        sumIdx -= arr[i];
+    }
+
+    return (lont)sumIdx;
+}
